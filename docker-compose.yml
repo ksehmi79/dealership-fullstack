@@ -1,0 +1,46 @@
+services:
+  postgres:
+    image: postgres:18
+    container_name: dealership-postgres
+    environment:
+      POSTGRES_DB: dealershipdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d dealershipdb"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: .
+    container_name: dealership-backend
+    environment:
+      DB_URL: jdbc:postgresql://postgres:5432/dealershipdb
+      DB_USERNAME: postgres
+      DB_PASSWORD: ${DB_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
+      SPRING_PROFILES_ACTIVE: dev
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      SALES_PASSWORD: ${SALES_PASSWORD}
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./dealership-frontend
+    container_name: dealership-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:

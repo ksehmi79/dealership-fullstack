@@ -1,0 +1,9 @@
+.git
+.vscode
+**/node_modules
+dealership-frontend/dist
+target/*
+!target/dealership-0.0.1-SNAPSHOT.jar
+.env
+.env.*
+*.log
