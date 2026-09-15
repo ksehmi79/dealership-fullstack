@@ -21,6 +21,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.transaction.annotation.Transactional;
 import tools.jackson.databind.json.JsonMapper;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import org.junit.jupiter.api.BeforeEach;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -32,7 +33,36 @@ class CarIntegrationTest {
 
   @Autowired private JsonMapper objectMapper;
 
+  @Autowired private AppUserRepository appUserRepository;
+
+  @Autowired private org.springframework.security.crypto.password.PasswordEncoder passwordEncoder;
+
   private ResultActions perform;
+
+
+  @BeforeEach
+void setUpUsers() {
+
+    if (appUserRepository.findByUsername("admin").isEmpty()) {
+        appUserRepository.save(
+            new AppUser(
+                "admin",
+                passwordEncoder.encode("admin123"),
+                "ADMIN"
+            )
+        );
+    }
+
+    if (appUserRepository.findByUsername("sales").isEmpty()) {
+        appUserRepository.save(
+            new AppUser(
+                "sales",
+                passwordEncoder.encode("sales123"),
+                "SALESPERSON"
+            )
+        );
+    }
+}
 
   @Test
   void shouldCreateCarThroughFullApplication() throws Exception {
