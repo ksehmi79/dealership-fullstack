@@ -29,8 +29,8 @@ jobs:
 
     env:
       TEST_DB_PASSWORD: postgres
-      ADMIN_PASSWORD: ci-admin-password
-      SALES_PASSWORD: ci-sales-password
+      ADMIN_PASSWORD: admin123
+      SALES_PASSWORD: sales123
       JWT_SECRET: ci-only-jwt-secret-key-12345678901234567890
 
     steps:
