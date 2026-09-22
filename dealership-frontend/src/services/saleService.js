@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8080/sales";
+const API_URL = "/api/sales";
 
 export function getSales(token) {
   return fetch(API_URL, {

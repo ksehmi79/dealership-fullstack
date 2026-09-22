@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8080/cars";
+const API_URL = "/api/cars";
 
 export function getCars() {
   return fetch(API_URL).then((response) => response.json());

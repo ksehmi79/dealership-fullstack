@@ -6,8 +6,6 @@ services:
       POSTGRES_DB: dealershipdb
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: ${DB_PASSWORD}
-    ports:
-      - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql
     healthcheck:

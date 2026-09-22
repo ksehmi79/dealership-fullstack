@@ -1,4 +1,4 @@
-const AUTH_URL = "http://localhost:8080/auth/login";
+const AUTH_URL = "/api/auth/login";
 
 export function loginUser(username, password) {
   const loginRequest = {
