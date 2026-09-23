@@ -24,6 +24,7 @@ services:
       JWT_SECRET: ${JWT_SECRET}
       SPRING_PROFILES_ACTIVE: prod
       APP_BOOTSTRAP_USERS: "true"
+      SPRING_JPA_OPEN_IN_VIEW: "false"
       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
       SALES_PASSWORD: ${SALES_PASSWORD}
     depends_on:
