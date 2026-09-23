@@ -25,6 +25,8 @@ services:
       SPRING_PROFILES_ACTIVE: prod
       APP_BOOTSTRAP_USERS: "true"
       SPRING_JPA_OPEN_IN_VIEW: "false"
+      SPRINGDOC_API_DOCS_ENABLED: "false"
+      SPRINGDOC_SWAGGER_UI_ENABLED: "false"
       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
       SALES_PASSWORD: ${SALES_PASSWORD}
     depends_on:
