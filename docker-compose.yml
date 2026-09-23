@@ -2,6 +2,7 @@ services:
   postgres:
     image: postgres:18
     container_name: dealership-postgres
+    restart: unless-stopped
     environment:
       POSTGRES_DB: dealershipdb
       POSTGRES_USER: postgres
@@ -17,6 +18,7 @@ services:
   backend:
     build: .
     container_name: dealership-backend
+    restart: unless-stopped
     environment:
       DB_URL: jdbc:postgresql://postgres:5432/dealershipdb
       DB_USERNAME: postgres
@@ -37,6 +39,7 @@ services:
     build:
       context: ./dealership-frontend
     container_name: dealership-frontend
+    restart: unless-stopped
     ports:
       - "80:80"
     depends_on:
