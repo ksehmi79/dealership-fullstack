@@ -41,3 +41,5 @@ dealership-frontend/dist/
 .env
 .env.*
 !.env.example
+# Database backups
+*_backup.sql
