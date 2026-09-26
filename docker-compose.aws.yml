@@ -1,0 +1,27 @@
+services:
+  backend:
+    build: .
+    container_name: dealership-backend
+    restart: unless-stopped
+    environment:
+      DB_URL: ${RDS_DB_URL}
+      DB_USERNAME: ${RDS_DB_USERNAME}
+      DB_PASSWORD: ${RDS_DB_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
+      SPRING_PROFILES_ACTIVE: prod
+      APP_BOOTSTRAP_USERS: "true"
+      SPRING_JPA_OPEN_IN_VIEW: "false"
+      SPRINGDOC_API_DOCS_ENABLED: "false"
+      SPRINGDOC_SWAGGER_UI_ENABLED: "false"
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      SALES_PASSWORD: ${SALES_PASSWORD}
+
+  frontend:
+    build:
+      context: ./dealership-frontend
+    container_name: dealership-frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
